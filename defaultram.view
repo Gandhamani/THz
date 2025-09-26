@@ -1,10 +1,10 @@
 # Version:1.0 MMMC View Definition File
 # Do Not Remove Above Line
-create_library_set -name Fast -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_fast_1p65V_m40C.lib}
-create_library_set -name Slow -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p35V_125C.lib}
-create_constraint_mode -name ram4x4 -sdc_files {netlist/ram4x4.sdc}
-create_delay_corner -name fast -library_set {Fast}
-create_delay_corner -name slow -library_set {Slow}
-create_analysis_view -name fast -constraint_mode {ram4x4} -delay_corner {fast}
-create_analysis_view -name slow -constraint_mode {ram4x4} -delay_corner {slow}
-set_analysis_view -setup {slow} -hold {fast}
+create_library_set -name WORST -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p35V_125C.lib}
+create_library_set -name BEST -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_fast_1p65V_m40C.lib}
+create_constraint_mode -name RAM -sdc_files {netlist/ram4x4.sdc}
+create_delay_corner -name BEST -library_set {BEST}
+create_delay_corner -name WORST -library_set {WORST}
+create_analysis_view -name best -constraint_mode {RAM} -delay_corner {BEST}
+create_analysis_view -name worst -constraint_mode {RAM} -delay_corner {WORST}
+set_analysis_view -setup {worst} -hold {best}
