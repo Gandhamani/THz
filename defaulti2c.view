@@ -1,0 +1,10 @@
+# Version:1.0 MMMC View Definition File
+# Do Not Remove Above Line
+create_library_set -name SLOW -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p35V_125C.lib}
+create_library_set -name FAST -timing {/mcci2/terry/users/gandhamani.mohanraju/IHP-Open-PDK-main_1/IHP-Open-PDK-main/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_fast_1p65V_m40C.lib}
+create_constraint_mode -name i2c -sdc_files {netlist/i2cslave.sdc}
+create_delay_corner -name slow -library_set {SLOW}
+create_delay_corner -name Fast -library_set {FAST}
+create_analysis_view -name slow -constraint_mode {i2c} -delay_corner {slow}
+create_analysis_view -name fast -constraint_mode {i2c} -delay_corner {Fast}
+set_analysis_view -setup {slow} -hold {fast}
